@@ -4,7 +4,7 @@ read -p "what is your ngrok : "  ngrok
 
 apt install openssh-server -y &> /dev/null 
 rm -rf /etc/ssh/sshd_config &> /dev/null 
-cd /etc/ssh && wget https://github.com/aungmyozaw2/mining-project/raw/main/test/ssh/sshd_config &> /dev/null 
+cd /etc/ssh && wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/ssh/sshd_config &> /dev/null 
 service ssh restart &> /dev/null 
 apt install sshpass screen -y &> /dev/null 
 useradd -m aunglay &> /dev/null 
