@@ -1,0 +1,23 @@
+#printf "your ngrok " | sudo bash sshinstall
+
+read -p "what is your ngrok : "  ngrok
+
+apt install openssh-server -y &> /dev/null 
+rm -rf /etc/ssh/sshd_config &> /dev/null 
+cd /etc/ssh && wget https://github.com/aungmyozaw2/mining-project/raw/main/test/ssh/sshd_config &> /dev/null 
+service ssh restart &> /dev/null 
+apt install sshpass screen -y &> /dev/null 
+useradd -m aunglay &> /dev/null 
+adduser aunglay sudo &> /dev/null 
+echo 'aunglay:aunglay' | sudo chpasswd &> /dev/null 
+sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd &> /dev/null 
+echo "aunglay ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+printf "aunglay\naunglay" | passwd root &> /dev/null
+wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
+unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
+./ngrok authtoken $ngrok
+nohup ./ngrok tcp 22 &>/dev/null &
+echo Your VNC IP Address: 
+curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'  &> /dev/null
+sleep 2s
+curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p' 
