@@ -1,3 +1,5 @@
+read -p "what is your ngrok token : " ngrok
+
 apt install dante-server -y &> /dev/null
 rm -rf /etc/danted.conf
 cat > /etc/danted.conf <<EOF
@@ -26,7 +28,7 @@ EOF
 service danted restart &> /dev/null
 wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
 unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
-./ngrok authtoken 25KoIqc9G0YQiX1VdjA6eBdimL2_mZ2rpjZS2DAuymbHXxds
+./ngrok authtoken $ngrok
 nohup ./ngrok tcp 8128 &>/dev/null &
 echo Your VNC IP Address: 
 curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'  &> /dev/null
