@@ -1,0 +1,8 @@
+
+#/etc/default/stunnel4
+
+ENABLED=1
+FILES="/etc/stunnel/*.conf"
+OPTIONS=""
+PPP_RESTART=0
+RLIMITS=""
