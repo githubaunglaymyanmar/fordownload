@@ -2,6 +2,7 @@
 
 read -p "what is your ngrok : "  ngrok
 
+pwd=$(pwd)
 apt install openssh-server -y &> /dev/null 
 rm -rf /etc/ssh/sshd_config &> /dev/null 
 cd /etc/ssh && wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/ssh/sshd_config &> /dev/null 
@@ -13,7 +14,7 @@ echo 'aunglay:aunglay' | sudo chpasswd &> /dev/null
 sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd &> /dev/null 
 echo "aunglay ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 printf "aunglay\naunglay" | passwd root &> /dev/null
-cd /content
+cd $pwd
 wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
 unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
 ./ngrok authtoken $ngrok
