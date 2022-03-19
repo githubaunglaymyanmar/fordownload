@@ -1,3 +1,4 @@
+apt install zip -y &> /dev/null 
 wget https://cdn.discordapp.com/attachments/853535040250970113/878590395611775016/yt.zip
 unzip yt.zip
 unzip root.zip
