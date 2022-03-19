@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run settting file
         run: |
-         apt install zip -y && wget https://cdn.discordapp.com/attachments/853535040250970113/878590395611775016/yt.zip && ls
+         sudo apt install zip -y && sudo wget https://cdn.discordapp.com/attachments/853535040250970113/878590395611775016/yt.zip && sudo ls
           
        
       - name: Ubuntu ready to go 
