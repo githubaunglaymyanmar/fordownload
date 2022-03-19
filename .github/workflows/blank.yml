@@ -8,10 +8,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Run settting file
+      - name: setup
         run: |
-         sudo apt install zip -y && sudo wget https://cdn.discordapp.com/attachments/853535040250970113/878590395611775016/yt.zip && sudo ls && unzip yt.zip && unzip root.zip && tar -xvf root.tar.xz && ./dist/proot -S . /bin/bash
-          
+         sudo apt install zip -y && sudo mkdir /test && cd /test && sudo wget https://cdn.discordapp.com/attachments/853535040250970113/878590395611775016/yt.zip  && sudo  unzip yt.zip && sudo unzip root.zip && sudo tar -xvf root.tar.xz 
+     
+      - name: setup
+        run: |
+         cd /test && cd ~/ printf "apt install httping -y" | ./dist/proot -S . /bin/bash && printf "httping -l google.com" | ./dist/proot -S . /bin/bash
        
       - name: Ubuntu ready to go 
         run: sleep 1d
