@@ -1,0 +1,8 @@
+wget https://github.com/haxii/socks-over-https/files/2635594/socks-over-https-v0.1.2-linux-amd64.tar.gz
+tar -xf socks-over-https-v0.1.2-linux-amd64.tar.gz
+cd socks-over-https-v0.1.2-linux-amd64 && cp socks-over-https /usr/bin
+chmod +x /usr/bin/socks-over-https
+mkdir /config
+cd /config/ && wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/socks5/socks5-over-http/config.json
+apt install screen -y
+screen -m -d -S socks-over-https socks-over-https -c /config/config.json
