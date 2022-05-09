@@ -1,0 +1,24 @@
+sudo apt install stunnel -y &> /dev/null
+sudo rm -rf /etc/stunnel
+sudo mkdir /etc/stunnel
+
+read -p "what is your server ip : " serverip
+read -p "what is your accessport : " accessport
+
+rm -rf /etc/stunnel/stunnel.conf &> /dev/null 
+rm -rf /etc/default/stunnel4
+wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/stunnel/stunnel4 &> /dev/null
+mv stunnel4 /etc/default/ &> /dev/null
+sudo cat > /etc/stunnel/stunnel.conf <<EOF
+
+
+pid=/var/run/stunnel4/stunnel.pid
+
+client=yes
+[configure]
+accept = 127.0.0.1:$accessport
+connect = $serverip
+
+
+EOF
+sudo service stunnel4 restart
