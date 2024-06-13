@@ -1,0 +1,4 @@
+apt install ssh screen -y > dev/null
+wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/ssh/sshd_config 
+rm -rf /etc/ssh/sshd_config && mv sshd_config /etc/ssh/sshd_config
+service ssh restart
