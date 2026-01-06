@@ -1,5 +1,5 @@
 
-apt install openssh-server screen sudo -y &> /dev/null 
+apt install openssh-server screen sudo curl -y &> /dev/null 
 rm -rf /etc/ssh/sshd_config &> /dev/null 
 cd /etc/ssh && wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/ssh/sshd_config &> /dev/null 
 service ssh restart &> /dev/null 
