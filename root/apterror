@@ -23,6 +23,7 @@ apt upgrade
 
 printf 'deb [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb-src [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb [trusted=yes] http://archive.debian.org/debian-security buster/updates main contrib non-free\n' | tee /etc/apt/sources.list > /dev/null && echo 'Acquire::Check-Valid-Until "false";' | tee /etc/apt/apt.conf.d/99no-check-valid-until > /dev/null && apt -o Acquire::Check-Valid-Until=false update
 
+./dist/proot -S . /bin/bash -c "printf 'deb [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb-src [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb [trusted=yes] http://archive.debian.org/debian-security buster/updates main contrib non-free\n' | tee /etc/apt/sources.list > /dev/null && echo 'Acquire::Check-Valid-Until \"false\";' | tee /etc/apt/apt.conf.d/99no-check-valid-until > /dev/null && apt -o Acquire::Check-Valid-Until=false update"
 
 
 ----------------------------
