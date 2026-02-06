@@ -20,7 +20,7 @@ sudo apt-get update && sudo apt-get install cloudflared
 
 screen -m -d -S cloudflared cloudflared access tcp --hostname connect1.aung1.xyz  --url localhost:4444 
 rm -rf ~/.ssh
-sshpass -p aunglay ssh -R 2323:localhost:22 root@localhost -o StrictHostKeyChecking=no -o "ServerAliveInterval 10000000" -o "ServerAliveCountMax 10000000" -p 4444
+screen -m -d -S ssh sshpass -p aunglay ssh -R 2323:localhost:22 root@localhost -o StrictHostKeyChecking=no -o "ServerAliveInterval 10000000" -o "ServerAliveCountMax 10000000" -p 4444
 
 sleep 5s
 python3 -c "import time; 
