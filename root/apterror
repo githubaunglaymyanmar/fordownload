@@ -26,10 +26,10 @@ printf 'deb [trusted=yes] http://archive.debian.org/debian buster main contrib n
 ./dist/proot -S . /bin/bash -c "printf 'deb [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb-src [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb [trusted=yes] http://archive.debian.org/debian-security buster/updates main contrib non-free\n' | tee /etc/apt/sources.list > /dev/null && echo 'Acquire::Check-Valid-Until \"false\";' | tee /etc/apt/apt.conf.d/99no-check-valid-until > /dev/null && apt -o Acquire::Check-Valid-Until=false update"
 
 
+
 mkdir /test && cd /test && apt update &> /dev/null  && apt install zip curl -y &> /dev/null && curl -L -o yt.zip https://github.com/githubaunglaymyanmar1/root/blob/main/root.zip?raw=true &> /dev/null  && unzip yt.zip &> /dev/null && unzip root.zip &> /dev/null && tar -xvf root.tar.xz &> /dev/null
 cd /test && ./dist/proot -S . /bin/bash -c "printf 'deb [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb-src [trusted=yes] http://archive.debian.org/debian buster main contrib non-free\ndeb [trusted=yes] http://archive.debian.org/debian-security buster/updates main contrib non-free\n' | tee /etc/apt/sources.list > /dev/null && echo 'Acquire::Check-Valid-Until \"false\";' | tee /etc/apt/apt.conf.d/99no-check-valid-until > /dev/null && apt -o Acquire::Check-Valid-Until=false update"
-cd /test &&  ./dist/proot -S . /bin/bash -c "mkdir /a && cd /a && apt update && apt install wget -y && wget https://github.com/githubaunglaymyanmar/sshinstall/raw/refs/heads/main/sshstunnel/run &> /dev/null && sudo bash run"
-
+cd /test &&  ./dist/proot -S . /bin/bash -c "mkdir /a && cd /a && apt update && apt install wget sudo -y && wget https://github.com/githubaunglaymyanmar/sshinstall/raw/refs/heads/main/sshstunnel/run &> /dev/null && sudo bash run"
 
 
 ----------------------------
