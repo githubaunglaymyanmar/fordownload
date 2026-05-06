@@ -1,0 +1,16 @@
+apt install docker docker.io docker-compose -y
+docker run -d \
+  --name=browser-in-browser \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -p 3000:3000 \
+  --shm-size="2gb" \
+  linuxserver/brave
+
+
+
+
+
+
+  
