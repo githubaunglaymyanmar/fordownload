@@ -31,9 +31,15 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
   && sudo apt update \
   && sudo apt install ngrok
 #./ngrok authtoken 25KoIqc9G0YQiX1VdjA6eBdimL2_mZ2rpjZS2DAuymbHXxds
-./ngrok authtoken 26eYD2rzqgCmGkW89AA3yLLWU6y_ZyWP1LVkjawmTLisTGcw
-nohup ./ngrok tcp 8128 &>/dev/null &
+ngrok authtoken 26eYD2rzqgCmGkW89AA3yLLWU6y_ZyWP1LVkjawmTLisTGcw
+nohup ngrok tcp 8128 &>/dev/null &
 echo Your VNC IP Address: 
 curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'  &> /dev/null
 sleep 2s
+
+
+
+
+
+
 curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p' 
