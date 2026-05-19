@@ -1,0 +1,47 @@
+sudo apt-get update
+sudo apt-get install dante-server -y
+
+cat <<EOF > /etc/danted.conf
+logoutput: stderr
+internal: 0.0.0.0 port = 1080
+external: eth0
+
+method: none
+user.notprivileged: nobody
+
+client pass {
+    from: 0.0.0.0/0 to: 0.0.0.0/0
+    log: connect disconnect
+}
+
+pass {
+    from: 0.0.0.0/0 to: 0.0.0.0/0
+    protocol: tcp udp
+    log: connect disconnect
+}
+EOF
+
+
+service danted restart
+
+
+
+curl --socks5 localhost:1080 https://ifconfig.me
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+echo done
+
+
+
