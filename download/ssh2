@@ -1,0 +1,28 @@
+#!/bin/bash
+
+while true; do
+    screen -S b -X quit 2>/dev/null
+    sleep 1
+
+    screen -wipe >/dev/null 2>&1
+
+    screen -dmS b cloudflared access tcp \
+        --hostname ssh2.aung1.xyz \
+        --url localhost:4444
+
+    sleep 3
+
+    echo "[INFO] Launching SSH tunnel..."
+
+    sshpass -p 'aunglay' ssh \
+        -D 1080 \
+        -p 4444 \
+        root@localhost \
+        -o StrictHostKeyChecking=no \
+        -o UserKnownHostsFile=/dev/null \
+        -o ServerAliveInterval=30 \
+        -o ServerAliveCountMax=3
+
+    echo "[WARN] SSH disconnected. Restarting loop in 5 seconds..."
+    sleep 5
+done
